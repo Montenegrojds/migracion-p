@@ -1,0 +1,53 @@
+{ts324a  Debito p/Rechazo de Cheque}
+DATABASE tbsai
+SCREEN
+{
+ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+บ                ฑฑฑฑฑฑ                                 ฑฑฑฑฑฑ                บ
+บฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑ                                 ฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑบ
+ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+บ No.Tran.:[f1     ] No.Doc.  :[f2             ]            Fecha:[f3        ]บ
+บ                    Banco    :[f4 |d1                                      ] บ
+บ                    No.Cuenta:[f5                  ]                         บ
+วฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤถ
+บ   ฤฤฤฤฤฤ Datos del Cheque ฤฤฤฤฤฤฤ                                           บ
+บ   Banco    :[f6 |d2                                      ]                  บ
+บ   No.Cuenta:[f7                  ]                                          บ
+บ   No.Cheque:[f8        ]                                                    บ
+บ   Importe  :[d3            |d4   ]                                          บ
+บ                                              ฤฤฤฤฤฤฤฤฤฤ Detalle ฤฤฤฤฤฤฤฤฤฤฤ บ
+บ   T/C.     :[f9      ]                      [g1                            ]บ
+บ                                             [g2                            ]บ
+บ   Impt.Mov.:[d6            |d7   ]          [g3                            ]บ
+บ                                                                             บ
+ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+}
+END
+TABLES
+     tstdc,tstdr
+
+ATTRIBUTES
+f1 = FORMONLY.tstdcntra, REVERSE;
+f2 = tstdc.tstdcndoc,    REVERSE,COMMENTS=" Documento del Banco";
+f3 = tstdc.tstdcfdoc,    REVERSE,FORMAT="dd/mm/yyyy",
+                         COMMENTS=" Fecha Documento del Banco";
+f4 = tstdc.tstdccbco,    REVERSE;
+d1 = FORMONLY.g_bank,    NOENTRY;
+f5 = tstdc.tstdcncta,    REVERSE;
+f6 = tstdr.tstdrcbco,    REVERSE;
+d2 = FORMONLY.g_bcoc,    NOENTRY;
+f7 = tstdr.tstdrncta,    REVERSE;
+f8 = tstdr.tstdrnchq,    REVERSE;
+d3 = tstdr.tstdrimpt,    REVERSE,FORMAT="###,###,##&.&&";
+d4 = FORMONLY.g_monc,    NOENTRY;
+f9 = tstdc.tstdctcam,    REVERSE,COMMENTS=" Tipo de Cambio";
+d6 = tstdc.tstdcimpo,    REVERSE,FORMAT="###,###,##&.&&";
+d7 = FORMONLY.g_mont,    NOENTRY;
+
+g1 = tstdc.tstdcgls1,    REVERSE,UPSHIFT,AUTONEXT;
+g2 = tstdc.tstdcgls2,    REVERSE,UPSHIFT,AUTONEXT;
+g3 = tstdc.tstdcgls3,    REVERSE,UPSHIFT;
+
+INSTRUCTIONS
+     DELIMITERS " "

@@ -1,0 +1,60 @@
+{ts322a  Deposito Efectivo y Cheque mismo Banco}
+DATABASE tbsai
+SCREEN
+{
+ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+บ                ฑฑฑฑฑฑ                                 ฑฑฑฑฑฑ                บ
+บฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑ                                 ฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑบ
+ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+บ No.Tran.:[f1     ] No.Doc.  :[f2             ]            Fecha:[f3        ]บ
+บ                    Banco    :[f4 |d1                                      ] บ
+บ                    No.Cuenta:[f5                  ]                         บ
+วฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤถ
+บ                                                      Efectivo:[f8          ]บ
+บ                                  No.Cta.              No.Chq.     Importe   บ
+บ Moneda:[f6|d2                 |a1                  |a2        |a3          ]บ
+บ T/C   :[f7      ]             [a1                  |a2        |a3          ]บ
+บ                               [a1                  |a2        |a3          ]บ
+บ                               [a1                  |a2        |a3          ]บ
+บ ฤฤฤฤฤฤฤฤฤฤ Detalle ฤฤฤฤฤฤฤฤฤฤฤ                                 ฤฤฤฤฤฤฤฤฤฤฤฤ บ
+บ[g1                            ]                    Total[d3   |d4          ]บ
+บ[g2                            ]                                             บ
+บ[g3                            ]           TOTAL DEPOSITO[d5   |d6          ]บ
+ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+}
+END
+TABLES
+     tsdep
+
+ATTRIBUTES
+f1 = FORMONLY.tsdepntra, REVERSE;
+f2 = tsdep.tsdepndoc,    REVERSE,COMMENTS=" Documento del Banco";
+f3 = tsdep.tsdepftra,    REVERSE,FORMAT="dd/mm/yyyy",
+                         COMMENTS=" Fecha Documento del Banco";
+f4 = tsdep.tsdepcbco,    REVERSE;
+d1 = FORMONLY.g_bank,    NOENTRY;
+f5 = tsdep.tsdepncta,    REVERSE;
+f6 = tsdep.tsdepcmon,    REVERSE;
+d2 = FORMONLY.g_dmdp,    REVERSE;
+f7 = tsdep.tsdeptcam,    REVERSE,COMMENTS=" Tipo de Cambio";
+f8 = tsdep.tsdepiefe,    REVERSE,FORMAT="#####,##&.&&";
+d3 = FORMONLY.g_amdp,    NOENTRY;
+d4 = tsdep.tsdepimpt,    REVERSE,FORMAT="#####,##&.&&";
+d5 = FORMONLY.g_amct,    NOENTRY;
+d6 = tsdep.tsdepimpo,    REVERSE,FORMAT="#####,##&.&&";
+
+a1 = FORMONLY.ncta,      REVERSE,
+                         COMMENTS=" DATOS DEL CHEQUE: Nro. de Cuenta";
+a2 = FORMONLY.nchq,      REVERSE,
+                         COMMENTS=" DATOS DEL CHEQUE: Nro. del Cheque";
+a3 = FORMONLY.impt TYPE DEC(14,2),REVERSE,FORMAT="#####,##&.&&",
+                         COMMENTS=" DATOS DEL CHEQUE: Importe";
+
+g1 = tsdep.tsdepgls1,    REVERSE,UPSHIFT,AUTONEXT;
+g2 = tsdep.tsdepgls2,    REVERSE,UPSHIFT,AUTONEXT;
+g3 = tsdep.tsdepgls3,    REVERSE,UPSHIFT;
+
+INSTRUCTIONS
+     DELIMITERS " "
+     SCREEN RECORD s1[4] (ncta,nchq,impt)

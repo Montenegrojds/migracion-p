@@ -1,0 +1,50 @@
+{ts325b  Libro de compras}                                                     
+DATABASE tbsai                                                                 
+SCREEN                                                                         
+{                                                                              
+วฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤถ
+บ T. Compra:[f|d0                    ] Tipo Doc.:[f5  |d1                    ]บ
+บ                                      Doc. Sec.:[f12 |d12                   ]บ
+บ NIT/CI   :[f1             ]   Fecha:[f6        ]                            บ
+บ Proveedor:[f7                                                ]              บ
+บ           [f7                                                ]              บ
+บ Nro. Fac.:[f3             ]               ฺฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ
+บ Nro. Aut.:[f4             ]               ณTotal Fact.   :[g1            ]  บ
+บ Cdgo.Ctrl:[f8               ]             ณImpt. Dcto.   :[g0            ]  บ
+บ CUF/CAED :[f11                           ]ณImpt. I.E.    :[g2            ]  บ
+บ           [f11                           ]ณImpt. Exento  :[g3            ]  บ
+บ                                           ณ               ฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ
+บ       T/C:[f9     ]                       ณImpt. Neto[d3  |g4            |d]บ
+ศอออออออออออออออออออออออออออออออออออออออออออฯอออออออออออออออออออออออออออออออออผ
+}                                                                              
+END                                                                            
+TABLES                                                                         
+     iplco                                                                     
+                                                                               
+ATTRIBUTES 
+f =  iplco.iplcotcom, REVERSE, COMMENTS=" Tipo de Compra      <CTRL-Y> QR SFV";
+d0 = FORMONLY.l_tcom;   
+f5 = iplco.iplcotdoc,REVERSE,COMMENTS=" Tipo de Documento";                  
+d1 = FORMONLY.l_tdoc;                                                          
+f12 = FORMONLY.iplcotdse,REVERSE,COMMENTS=" Tipo de Sector";
+d12 = FORMONLY.g_tdse; 
+f1 = iplco.iplconruc,REVERSE;
+f6 = iplco.iplcoftra,REVERSE,FORMAT="dd/mm/yyyy",                            
+                     COMMENTS=" Fecha de Emision del Documento";
+f7 = iplco.iplcoprov,REVERSE,UPSHIFT, WORDWRAP COMPRESS;
+f3 = iplco.iplconfac,REVERSE,FORMAT="###############",COMMENTS=" Correlativo";
+f4 = iplco.iplconord,REVERSE,FORMAT="###############",
+		     COMMENTS=" Nro. de Autorizacion";
+f8 = FORMONLY.iplcocctl,REVERSE,UPSHIFT;
+f11 = FORMONLY.iplcoccuf TYPE CHAR,REVERSE, WORDWRAP COMPRESS,UPSHIFT;
+f9 = FORMONLY.tstdctcam,REVERSE;                                              
+g1 = iplco.iplcoimpt,REVERSE,FORMAT="###,###,##&.&&";
+g0 = iplco.iplcoidsc,REVERSE,FORMAT="###,###,##&.&&";                        
+g2 = iplco.iplcoiice,REVERSE,FORMAT="###,###,##&.&&";                        
+g3 = iplco.iplcoiexe,REVERSE,FORMAT="###,###,##&.&&";                        
+g4 = FORMONLY.l_neto TYPE DECIMAL(14,2),REVERSE,NOENTRY,                    
+                     FORMAT="###,###,##&.&&";                                 
+d3 = FORMONLY.l_abre,NOENTRY;                                                 
+d  = FORMONLY.l_ente,INVISIBLE;                                                                               
+INSTRUCTIONS                                                                   
+     DELIMITERS " "

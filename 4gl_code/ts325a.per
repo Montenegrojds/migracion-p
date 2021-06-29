@@ -1,0 +1,59 @@
+{ts325a  Debitos/Abonos}
+DATABASE tbsai
+SCREEN
+{
+ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+บ                ฑฑฑฑฑฑ                                 ฑฑฑฑฑฑ                บ
+บฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑ                                 ฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑฑบ
+ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+ษอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+บ No.Tran.:[f1     ] No.Doc.  :[f2             ]            Fecha:[f3        ]บ
+บ                    Banco    :[f4 |d1                                      ] บ
+บ                    No.Cuenta:[f5                  ]                         บ
+วฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤถ
+บ                                                                             บ
+บ Tipo Mov.:[f6|d2     ]                                                      บ
+บ Concepto :[f7 |d3                                      ]                    บ
+บ                                              Doc. Fiscal:[f]                บ
+บ Moneda   :[f9|f12                          ]        [g4  |g5               ]บ
+บ                                              ฤฤฤฤฤฤฤฤฤฤ Detalle ฤฤฤฤฤฤฤฤฤฤฤ บ
+บ Importe  :[f8            |d4  ]             [g1                            ]บ
+บ T/C      :[f10     ]                        [g2                            ]บ
+บ Impt.Mov.:[f11           |d5  ]             [g3                            ]บ
+บ                                                                             บ
+ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+}
+END
+TABLES
+     tstdc
+
+ATTRIBUTES
+f1 = FORMONLY.tstdcntra, REVERSE;
+f2 = tstdc.tstdcndoc,    REVERSE,COMMENTS=" Documento del Banco";
+f3 = tstdc.tstdcftra,    REVERSE,FORMAT="dd/mm/yyyy",
+			 COMMENTS=" Fecha Documento del Banco";
+f4 = tstdc.tstdccbco,    REVERSE;
+d1 = FORMONLY.g_bank,    NOENTRY;
+f5 = tstdc.tstdcncta,    REVERSE;
+f6 = tstdc.tstdcpref,    REVERSE,COMMENTS=" 1=Debito  2=Abono";
+d2 = FORMONLY.g_dtmv,    NOENTRY;
+f7 = tstdc.tstdccorr,    REVERSE;
+d3 = FORMONLY.tstmvdesc, NOENTRY;
+f8 = tstdc.tstdcimpt,    REVERSE,FORMAT="###,###,##&.&&";
+d4 = FORMONLY.g_abre,    NOENTRY;
+f9 = tstdc.tstdccmon,    REVERSE;
+f12 = FORMONLY.g_descmon,NOENTRY;
+f10 = tstdc.tstdctcam,   REVERSE;
+f11 = tstdc.tstdcimpo,   REVERSE,NOENTRY,FORMAT="###,###,##&.&&";
+d5  = FORMONLY.g_abre1,  NOENTRY;
+f  = FORMONLY.g_mdoc,    REVERSE,UPSHIFT,
+     COMMENTS=" (F)actura  (P)oliza  (B)oletos  (N)o";
+
+g1 = tstdc.tstdcgls1,    REVERSE,UPSHIFT,AUTONEXT;
+g2 = tstdc.tstdcgls2,    REVERSE,UPSHIFT,AUTONEXT;
+g3 = tstdc.tstdcgls3,    REVERSE,UPSHIFT;
+g4 = FORMONLY.g_etiq,    NOENTRY;
+g5 = FORMONLY.g_ddoc,    NOENTRY;
+
+INSTRUCTIONS
+     DELIMITERS " "
